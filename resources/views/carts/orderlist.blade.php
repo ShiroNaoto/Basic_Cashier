@@ -11,8 +11,8 @@
     </div>
 </div>
 
-<div class="card-body table-responsive p-0" style="height: 500px;">
-    <table class="table table-head-fixed text-nowrap">
+<div class="card-body table-responsive">
+    <table class="table table-head-fixed table-striped table-bordered">
         <thead>
             <tr>
                 <th>Date and Time</th>
@@ -27,7 +27,11 @@
                     <td>
                         @foreach($data['products'] as $product)
                             <div class="product-info mb-2">
-                                <p>{{ $product['product']->name }} - {{ $product['quantity'] }} units</p>
+                                @if($product['product'])
+                                    <p>{{ $product['product']->name }} - {{ $product['quantity'] }} units</p>
+                                @else
+                                    <p>Product no longer available - {{ $product['quantity'] }} units</p>
+                                @endif
                             </div>
                         @endforeach
                     </td>

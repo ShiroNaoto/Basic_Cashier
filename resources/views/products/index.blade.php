@@ -10,7 +10,7 @@
 
             <div class="col-sm-6">
                 <div class="breadcrumb float-sm-right">
-                    <button type="button" onclick="window.location.href='{{ route('products.create') }}'" class="btn btn-block btn-primary btn-lg">
+                    <button type="button" onclick="window.location.href='{{ route('products.create') }}'" class="btn btn-primary">
                         <i class="fa fa-plus-circle mr-1"></i>Add Product
                     </button>
                 </div>
@@ -19,8 +19,8 @@
     </div>
 </div>
 
-<div class="card-body table-responsive p-0" style="height: 600px;">
-    <table class="table table-head-fixed text-nowrap">
+<div class="card-body table-responsive">
+    <table class="table table-striped table-bordered table-hover">
         <thead>
             <tr>
                 <th>Image</th>
@@ -41,15 +41,15 @@
                     />
                 </td>
                 <td>{{ $product->name }}</td>
-                <td>$ {{ $product->price }}</td>
+                <td>$ {{ number_format($product->price, 2) }}</td>
                 <td>{{ $product->stock }}</td>
                 <td>
                     <div class="btn-group">
                         <button type="button" class="btn btn-success">Action</button>
-                        <button type="button" class="btn btn-success dropdown-toggle dropdown-hover dropdown-icon" data-toggle="dropdown">
+                        <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                             <span class="sr-only">Toggle Dropdown</span>
                         </button>
-                        <div class="dropdown-menu" role="menu">
+                        <div class="dropdown-menu">
                             <a class="dropdown-item" href="{{ route('products.edit', $product->id) }}">Update</a>
                             <a class="dropdown-item" data-toggle="modal" data-target="#removeModal{{ $product->id }}">Remove Item</a>
                         </div>

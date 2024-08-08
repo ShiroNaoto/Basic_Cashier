@@ -40,11 +40,11 @@ class CartController extends Controller
         ]);
     }
 
-    public function orderlist()
+   public function orderlist()
     {
         $carts = Cart::all();
         $itemCount = $carts->count();
-        $ships = Ship::all();
+        $ships = Ship::with('product')->get(); // Eager load products
 
         // Group shipments by exact date and time
         $groupedShips = $ships->groupBy(function ($item) {
@@ -53,8 +53,9 @@ class CartController extends Controller
 
             // Aggregate products within each timestamp group
             $productAggregations = $group->groupBy('prodid')->map(function ($items) {
+                $firstItem = $items->first();
                 return [
-                    'product' => $items->first()->product,
+                    'product' => $firstItem->product, // Ensure product relationship is available
                     'quantity' => $items->sum('quantity'),
                     'totalPrice' => $items->sum('price'),
                 ];
